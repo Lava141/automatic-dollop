@@ -81,13 +81,13 @@ client.on('message', message => {
 });
 
 client.on('message', message => {
-    if (message.content === 'not working') {
+    if (message.content === 'Rex Tracker is not working') {
     	message.channel.send('You are maybe using ipv6, we will fix this issue shortly before release!'); 
   	}
 });
 
 client.on('message', message => {
-    if(message.content === "isnt working") {
+    if(message.content === "Rex Tracker isnt working") {
       message.channel.send('You are maybe using ipv6, we will fix this issue shortly before release!'); 
     }
 });
