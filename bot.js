@@ -12,6 +12,11 @@ client.on('message', message => {
       color: 3447003,
       description: "An Error Occured!"
       }});
+      message.channel.send({embed: {
+      color: 3447003,
+      description: "An Error Occured!"
+      description: "An Error Occured!"
+      }});
   	}
 });
 
