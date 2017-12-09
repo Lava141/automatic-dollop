@@ -2,8 +2,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 
 client.on('ready', () => {
-    console.log('I am ready!');
-    message.reply('I have been updated to a new version!');
+    console.log('Rex Tracker Bot Started Sucessfully');
 });
 
 client.on('message', message => {
