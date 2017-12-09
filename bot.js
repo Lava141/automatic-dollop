@@ -16,8 +16,8 @@ message.channel.send({embed: {
     },
     description: "Here are all the commands you can execute",
     fields: [{
-        name: "Fields",
-        value: "They can have different fields with small headlines."
+        name: "[***!help***] : ",
+        value: "Display all commands with description."
       },
       {
         name: "Masked links",
