@@ -8,31 +8,22 @@ client.on("ready",  message => {
 
 client.on('message', message => {
     if (message.content === '!help') {
-message.channel.send({embed: {
+      message.channel.send({embed: {
     color: 3447003,
-    author: {
-      name: client.user.username,
-      icon_url: client.user.avatarURL
-    },
-    description: "Here are all the commands you can execute",
+    description: "This is a test embed to showcase what they look like and what they can do.",
     fields: [{
-        name: "!help : ",
-        value: "Display all commands with description."
+        name: "Fields",
+        value: "They can have different fields with small headlines."
       },
       {
-        name: "!hello :",
-        value: "I will reply you with a hello and my name."
+        name: "Masked links",
+        value: "You can put [masked links](http://google.com) inside of rich embeds."
       },
       {
-        name: "!new-update :",
-        value: "Announces a new update arrival"
+        name: "Markdown",
+        value: "You can put all the *usual* **__Markdown__** inside of them."
       }
     ],
-    timestamp: new Date(),
-    footer: {
-      icon_url: client.user.avatarURL,
-      text: "Rex Tracker"
-    }
   }
 });
   	}
