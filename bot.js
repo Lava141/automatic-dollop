@@ -3,15 +3,16 @@ const client = new Discord.Client();
 
 client.on('ready', () => {
     console.log('Rex Tracker Bot Started Sucessfully');
-    
-    var channel = client.servers.get("name", "My Server").defaultChannel;
-    client.sendMessage(channel, "I have been updated to a newer version of Rex Tracker Discord Bot!");
     //message('I have been updated to a newer version of Rex Tracker Discord Bot!');
+});
+
+client.on('message', function(message) {
+        client.sendMessage("An critical error occured!");
 });
 
 client.on('message', message => {
     if (message.content === '!help') {
-    	message.reply('An Error Occured!!');
+    	message.reply('An critical error occured!');
   	}
 });
 
