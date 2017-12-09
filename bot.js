@@ -8,7 +8,7 @@ client.on("ready",  message => {
 
 client.on('message', message => {
     if (message.content === '!help') {
-      message.channel.send("Failed to get data from http://rex-tracker.wcksoft.com");
+      message.channel.send(":x: Failed to get data from http://rex-tracker.wcksoft.com");
   	}
 });
 
@@ -20,8 +20,12 @@ client.on('message', message => {
 
 client.on('message', message => {
     if (message.content === '!new-update') {
-      if(message.au
-    	message.reply('');
+      if(message.author === "Blackrock") {
+        message.channel.send(":x: Failed to get data from http://rex-tracker.wcksoft.com");        
+      } else {
+        message.channel.send(":x: You are not allowed to run this command! Action will be logged!");
+        console.log('User message.author tryed to execute !new-update')
+      }
   	}
 });
 
