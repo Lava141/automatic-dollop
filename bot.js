@@ -1,6 +1,9 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 
+var channel = client.servers.get("name", "My Server").defaultChannel;
+client.sendMessage(channel, "I have been updated to a newer version of Rex Tracker Discord Bot!");
+
 client.on('ready', () => {
     console.log('Rex Tracker Bot Started Sucessfully');
     message('I have been updated to a newer version of Rex Tracker Discord Bot!');
