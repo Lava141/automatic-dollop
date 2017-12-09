@@ -3,10 +3,7 @@ const client = new Discord.Client();
 
 client.on("ready", () => {
   // This event will run if the bot starts, and logs in, successfully.
-  console.log(`Bot has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds.`); 
-  // Example of changing the bot's playing game to something useful. `client.user` is what the
-  // docs refer to as the "ClientUser".
-  client.user.setGame(`Rex Tracker`);
+  console.log('Rex Tracker Bot has started sucessfully'); 
 });
 
 client.on('message', message => {
