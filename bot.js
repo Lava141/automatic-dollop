@@ -13,7 +13,7 @@ client.on('message', message => {
 
 client.on('message', message => {
     if (message.content === 'What is the most recent update?') {
-    	message.reply('Hello, my name is Rex Tracker and i will respond to all your questions and notify you went new updates arrive!');
+    	message.reply('The current update is : v{{ $current_update }}');
   	}
 });
 
