@@ -3,6 +3,7 @@ const client = new Discord.Client();
 
 client.on('ready', () => {
     console.log('I am ready!');
+    message.reply('I have been updated to a new version!');
 });
 
 client.on('message', message => {
@@ -16,6 +17,8 @@ client.on('message', message => {
     	message.reply('The current update is : v{{ $current_update }}');
   	}
 });
+
+client.on 
 
 // THIS  MUST  BE  THIS  WAY
 client.login(process.env.BOT_TOKEN);
