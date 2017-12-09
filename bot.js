@@ -10,18 +10,18 @@ client.on('message', message => {
     if (message.content === '!help') {
 message.channel.send({embed: {
     color: 3447003,
-    description: "This is a test embed to showcase what they look like and what they can do.",
+    description: "Here are all the commands you can execute!",
     fields: [{
-        name: "Fields",
-        value: "They can have different fields with small headlines."
+        name: "!help",
+        value: "Displays all commands"
       },
       {
-        name: "Masked links",
-        value: "You can put [masked links](http://google.com) inside of rich embeds."
+        name: "!new-update",
+        value: "Notify went new updates arrive!"
       },
       {
-        name: "Markdown",
-        value: "You can put all the *usual* **__Markdown__** inside of them."
+        name: "!hello",
+        value: "A fun command, try it!"
       }
     ],
   }
