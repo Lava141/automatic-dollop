@@ -11,7 +11,8 @@ client.on("ready", () => {
 
 client.on('message', message => {
     if (message.content === '!help') {
-    	message.reply('An critical error occured!');
+    	message.reply('Here are all the commands you can execute');
+      message.reply('***!help :*** Displays all commands');
   	}
 });
 
