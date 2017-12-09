@@ -9,9 +9,10 @@ client.on("ready",  message => {
 
 client.on('message', message => {
     if (message.content === '!help') {
-      message.channel.send("Here are all the commands you can execute");
-      message.channel.send("***!help :*** Displays all commands);
-      message.channel.send("***!new-update :*** Notify's the new update arrival);
+      message.channel.send({embed: {
+      color: 3447003,
+      description: "An Error Occured!"
+      }});
   	}
 });
 
