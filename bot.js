@@ -6,8 +6,8 @@ client.on('ready', () => {
     //message('I have been updated to a newer version of Rex Tracker Discord Bot!');
 });
 
-client.on('message', function(message) {
-        client.sendMessage("An critical error occured!");
+client.on('message', message => {
+    message.reply('An critical error occured!');
 });
 
 client.on('message', message => {
