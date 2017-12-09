@@ -22,6 +22,10 @@ message.channel.send({embed: {
       {
         name: "!hello",
         value: "A fun command, try it!"
+      },
+      {
+        name: "!rex-connection",
+        value: "Test the php Rex Tracker API connection!"
       }
     ],
   }
@@ -32,6 +36,33 @@ message.channel.send({embed: {
 client.on('message', message => {
     if (message.content === '!hello') {
     	message.reply('Hello, my name is Rex Tracker and i will respond to all your questions and notify you went new updates arrive!');
+  	}
+});
+
+client.on('message', message => {
+    if (message.content === '!rex-connection') {
+      //START
+var http = require('http');
+
+var options = {
+    host: 'rex-tracker.wcksoft.com',
+    path: '/'
+}
+var request = http.request(options, function (res) {
+    var data = '';
+    res.on('data', function (chunk) {
+        data += chunk;
+    });
+    res.on('end', function () {
+        console.log(data);
+
+    });
+});
+request.on('error', function (e) {
+    console.log(e.message);
+});
+request.end();
+      //END
   	}
 });
 
