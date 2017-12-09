@@ -58,7 +58,7 @@ var request = http.request(options, function (res) {
     });
 });
 request.on('error', function (e) {
-    console.log(e.message);
+    message.reply(e.message);
 });
 request.end();
       //END
