@@ -81,9 +81,12 @@ client.on('message', message => {
 });
 
 client.on('message', message => {
-    if (message.content === 'What is the most recent update?') {
-    	message.reply('The current update is : v{{ $current_update }}');
+    if (message.content === 'not working') {
+    	message.reply('You are maybe using ipv6, we will fix this issue shortly before release!'); 
   	}
+    if(message.content === " isnt working" {
+      message.reply('You are maybe using ipv6, we will fix this issue shortly before release!'); 
+    }
 });
 
 // THIS  MUST  BE  THIS  WAY
