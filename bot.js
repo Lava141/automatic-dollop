@@ -102,13 +102,7 @@ client.on('message', message => {
 
 client.on("message", message => {
   if (message.channel.type === "dm") {
-    clbot.write(message.content, (response) => {
-      message.channel.startTyping();
-      setTimeout(() => {
-        message.channel.send(response.output).catch(console.error);
-        message.channel.stopTyping();
-      }, Math.random() * (1 - 3) + 1 * 1000);
-    });
+    message.channel.send('Dont direct message me please!'); 
   }
 });
 
