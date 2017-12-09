@@ -28,11 +28,6 @@ message.channel.send({embed: {
         value: "Announces a new update arrival"
       }
     ],
-    timestamp: new Date(),
-    footer: {
-      icon_url: client.user.avatarURL,
-      text: "© Example"
-    }
   }
 });
   	}
