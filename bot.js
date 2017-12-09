@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 
-client.on("ready", () => {
+client.on("ready",  message => {
   // This event will run if the bot starts, and logs in, successfully.
   console.log('Rex Tracker Bot has started sucessfully'); 
   message.channel.send("I have been updated to a newer version!");
