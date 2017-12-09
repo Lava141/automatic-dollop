@@ -27,12 +27,12 @@ message.channel.send({embed: {
         name: "!new-update",
         value: "Announces a new update arrival"
       }
-      timestamp: new Date(),
-      footer: {
+    ],
+    timestamp: new Date(),
+    footer: {
       icon_url: client.user.avatarURL,
       text: "Rex Tracker"
-      }
-    ],
+    }
   }
 });
   	}
