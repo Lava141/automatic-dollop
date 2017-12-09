@@ -24,7 +24,7 @@ message.channel.send({embed: {
         value: "I will reply you with a hello and my name."
       },
       {
-        name: "!new-update",
+        name: "!new-update :",
         value: "Announces a new update arrival"
       }
     ],
