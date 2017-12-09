@@ -16,16 +16,16 @@ message.channel.send({embed: {
     },
     description: "Here are all the commands you can execute",
     fields: [{
-        name: "[***!help***] : ",
+        name: "!help : ",
         value: "Display all commands with description."
       },
       {
-        name: "Masked links",
-        value: "You can put [masked links](http://google.com) inside of rich embeds."
+        name: "!hello :",
+        value: "I will reply you with a hello and my name."
       },
       {
-        name: "Markdown",
-        value: "You can put all the *usual* **__Markdown__** inside of them."
+        name: "!new-update",
+        value: "Announces a new update arrival"
       }
     ],
     timestamp: new Date(),
@@ -41,6 +41,13 @@ message.channel.send({embed: {
 client.on('message', message => {
     if (message.content === '!hello') {
     	message.reply('Hello, my name is Rex Tracker and i will respond to all your questions and notify you went new updates arrive!');
+  	}
+});
+
+client.on('message', message => {
+    if (message.content === '!new-update') {
+      if(message.au
+    	message.reply('');
   	}
 });
 
