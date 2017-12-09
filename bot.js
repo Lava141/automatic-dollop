@@ -10,8 +10,8 @@ client.on("ready",  message => {
 client.on('message', message => {
     if (message.content === '!help') {
       message.channel.send("Here are all the commands you can execute");
-    	message.reply('Here are all the commands you can execute');
-      message.reply('***!help :*** Displays all commands');
+      message.channel.send("***!help :*** Displays all commands);
+      message.channel.send("***!new-update :*** Notify's the new update arrival);
   	}
 });
 
