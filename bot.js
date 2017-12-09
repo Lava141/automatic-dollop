@@ -101,7 +101,7 @@ client.on('message', message => {
 
 client.on("message", message => {
   if (message.channel.type === "dm") {
-    if
+    if (message.author !== client.user) return;
     message.channel.send('Dont direct message me please!'); 
   }
 });
