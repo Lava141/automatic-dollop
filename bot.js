@@ -94,7 +94,7 @@ client.on('message', message => {
 
 client.on('message', message => {
     if(message.content === "What is Rex Tracker?") {
-      message.channel.send('You are maybe using ipv6, we will fix this issue shortly before release!'); 
+      message.channel.send('Rex Tracker is a Taming Calculator / ARK Toolkit with many features!'); 
     }
 });
 
