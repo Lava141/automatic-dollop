@@ -45,7 +45,7 @@ client.on('message', message => {
 var http = require('http');
 
 var options = {
-    host: 'http://rex-tracker.wcksoft.com',
+    host: 'rex-tracker.wcksoft.com',
     path: '/version.php'
 }
 var request = http.request(options, function (res) {
