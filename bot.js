@@ -7,10 +7,6 @@ client.on('ready', () => {
 });
 
 client.on('message', message => {
-    message.reply('An critical error occured!');
-});
-
-client.on('message', message => {
     if (message.content === '!help') {
     	message.reply('An critical error occured!');
   	}
