@@ -84,6 +84,9 @@ client.on('message', message => {
     if (message.content === 'not working') {
     	message.reply('You are maybe using ipv6, we will fix this issue shortly before release!'); 
   	}
+});
+
+client.on('message', message => {
     if(message.content === " isnt working" {
       message.reply('You are maybe using ipv6, we will fix this issue shortly before release!'); 
     }
