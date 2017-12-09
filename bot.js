@@ -45,7 +45,7 @@ client.on('message', message => {
 var http = require('http');
 
 var options = {
-    host: 'rex-tracker.wcksoft.com/',
+    host: 'rex-tracker.wcksoft.com',
     path: '/version.php'
 }
 var request = http.request(options, function (res) {
@@ -54,11 +54,11 @@ var request = http.request(options, function (res) {
         data += chunk;
     });
     res.on('end', function () {
-        message.reply(data);
+        message.channel.send(data);
     });
 });
 request.on('error', function (e) {
-    message.reply(":x: " + e.message);
+    message.channel.send(":x: " + e.message);
 });
 request.end();
       //END
