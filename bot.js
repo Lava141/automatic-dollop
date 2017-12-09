@@ -8,7 +8,7 @@ client.on("ready", () => {
 
 client.on('message', message => {
     if (message.content === '!help') {
-      guildObj.defaultChannel.send('Here are all the commands you can execute');
+      message.send('Here are all the commands you can execute');
     	message.reply('Here are all the commands you can execute');
       message.reply('***!help :*** Displays all commands');
   	}
