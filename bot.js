@@ -3,6 +3,7 @@ const client = new Discord.Client();
 
 client.on("ready",  message => {
   // This event will run if the bot starts, and logs in, successfully.
+  client.user.setGame('Rex Tracker');
   console.log('Rex Tracker Bot has started sucessfully'); 
 });
 
@@ -100,6 +101,7 @@ client.on('message', message => {
 
 client.on("message", message => {
   if (message.channel.type === "dm") {
+    if
     message.channel.send('Dont direct message me please!'); 
   }
 });
