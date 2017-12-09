@@ -10,6 +10,11 @@ client.on('message', message => {
     if (message.content === '!help') {
       message.channel.send({embed: {
     color: 3447003,
+    author: {
+      name: client.user.username,
+      icon_url: client.user.avatarURL
+    },
+    title: "This is an embed",
     description: "This is a test embed to showcase what they look like and what they can do.",
     fields: [{
         name: "Fields",
@@ -24,6 +29,11 @@ client.on('message', message => {
         value: "You can put all the *usual* **__Markdown__** inside of them."
       }
     ],
+    timestamp: new Date(),
+    footer: {
+      icon_url: client.user.avatarURL,
+      text: "© Example"
+    }
   }
 });
   	}
