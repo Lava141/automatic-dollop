@@ -26,6 +26,10 @@ message.channel.send({embed: {
       {
         name: "!rex-connection",
         value: "Test the php Rex Tracker API connection!"
+      },
+      {
+        name: "!rex-tracker-version",
+        value: "Get the current rex tracker version!"
       }
     ],
   }
@@ -40,7 +44,7 @@ client.on('message', message => {
 });
 
 client.on('message', message => {
-    if (message.content === '!rex-connection') {
+    if (message.content === '!rex-tracker-version') {
       //START
 var http = require('http');
 
@@ -54,7 +58,7 @@ var request = http.request(options, function (res) {
         data += chunk;
     });
     res.on('end', function () {
-        message.channel.send(data);
+        message.channel.send("The current Rex Tracker version is " + data);
     });
 });
 request.on('error', function (e) {
