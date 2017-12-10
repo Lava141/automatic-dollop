@@ -1,7 +1,16 @@
 const Discord = require('discord.js');
+var music = require("discord-music-bot");
 const client = new Discord.Client();
 const Cleverbot = require("cleverbot-node");
 const clbot = new Cleverbot;
+
+var serverName = "Your server name here";
+var textChannelName = "Music";
+var voiceChannelName = "Music";
+var aliasesFile = "aliases.txt";
+
+bot.run(serverName, textChannelName, voiceChannelName, aliasesFile, process.env.BOT_TOKEN);
+
 
 client.on("ready",  () => {
   // This event will run if the bot starts, and logs in, successfully.
