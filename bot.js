@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
+const Cleverbot = require("cleverbot-node");
 
 client.on("ready",  message => {
   // This event will run if the bot starts, and logs in, successfully.
