@@ -139,19 +139,14 @@ const embed = new Discord.RichEmbed()
   /*
    * Takes a Date object, defaults to current date.
    */
-  .setTimestamp()
   .setURL("https://discord.js.org/#/docs/main/indev/class/RichEmbed")
   .addField("[Ads]",
     "Do you know about Rex Tracker? Its the brand new taming calculator / Ark Toolkit! http://rex-tracker.wcksoft.com")
   /*
-   * Inline fields may not display as inline if the thumbnail and/or image is too big.
-   */
-  .addField("Inline Field", "They can also be inline.", true)
-  /*
    * Blank field, useful to create some space.
    */
   .addBlankField(true)
-  .addField("Inline Field 3", "You can have a maximum of 25 fields.", true);
+  .addField("Join Our Discord!", "https://discord.gg/RzbJZyF", true);
 
 client.on('message', message => {
     if (message.content === "!test-ads") {
