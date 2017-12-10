@@ -135,20 +135,23 @@ const embed = new Discord.RichEmbed()
    * Alternatively, use "#00AE86", [0, 174, 134] or an integer number.
    */
   .setColor(0x00AE86)
-  .setImage("https://i.imgur.com/8Gte59I.png")
+  .setImage("https://imgur.com/8Gte59I.png")
   /*
    * Takes a Date object, defaults to current date.
    */
+  .setTimestamp()
+  .setURL("https://discord.js.org/#/docs/main/indev/class/RichEmbed")
   .addField("[Ads]",
     "Do you know about Rex Tracker? Its the brand new taming calculator / Ark Toolkit! http://rex-tracker.wcksoft.com")
   /*
    * Inline fields may not display as inline if the thumbnail and/or image is too big.
    */
-  .addField("", "https://discord.gg/RzbJZyF", true)
+  .addField("Inline Field", "They can also be inline.", true)
   /*
    * Blank field, useful to create some space.
    */
   .addBlankField(true)
+  .addField("Inline Field 3", "You can have a maximum of 25 fields.", true);
 
 client.on('message', message => {
     if (message.content === "!test-ads") {
