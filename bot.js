@@ -130,7 +130,7 @@ const embed = new Discord.RichEmbed()
    * Alternatively, use "#00AE86", [0, 174, 134] or an integer number.
    */
   .setColor(0x00AE86)
-  .setImage("https://imgur.com/OTmgcgj")
+  .setImage("https://imgur.com/OTmgcgj.png")
   /*
    * Takes a Date object, defaults to current date.
    */
