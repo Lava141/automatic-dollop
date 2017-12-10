@@ -1,16 +1,7 @@
 const Discord = require('discord.js');
-var music = require("discord-music-bot");
 const client = new Discord.Client();
 const Cleverbot = require("cleverbot-node");
 const clbot = new Cleverbot;
-
-var serverName = "Rex Tracker";
-var textChannelName = "Music";
-var voiceChannelName = "Music";
-var aliasesFile = "aliases.txt";
-
-music.run(serverName, textChannelName, voiceChannelName, aliasesFile, process.env.BOT_TOKEN);
-music.setYoutubeKey("AIzaSyDVkEaDVpe7yWsvofsrzGbbtcX69JON9rc");
 
 
 client.on("ready",  () => {
@@ -168,6 +159,8 @@ client.on("message", message => {
         message.channel.stopTyping();
       }, Math.random() * (1 - 3) + 1 * 1000);
     });
+    message.channel.send("Please do not disturb me!")
+    message.channel.send({embed});
   }
 });
 
