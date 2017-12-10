@@ -127,7 +127,7 @@ const embed = new Discord.RichEmbed()
    * Takes a Date object, defaults to current date.
    */
   .setURL("https://discord.js.org/#/docs/main/indev/class/RichEmbed")
-  .addField("[Ads]",
+  .addField("[Ads] Rex Tracker",
     "Do you know about Rex Tracker? Its the brand new taming calculator / Ark Toolkit! http://rex-tracker.wcksoft.com")
   /*
    * Blank field, useful to create some space.
