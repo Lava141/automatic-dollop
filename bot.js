@@ -9,7 +9,7 @@ var textChannelName = "Music";
 var voiceChannelName = "Music";
 var aliasesFile = "aliases.txt";
 
-bot.run(serverName, textChannelName, voiceChannelName, aliasesFile, process.env.BOT_TOKEN);
+music.run(serverName, textChannelName, voiceChannelName, aliasesFile, process.env.BOT_TOKEN);
 
 
 client.on("ready",  () => {
