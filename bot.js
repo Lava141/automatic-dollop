@@ -110,13 +110,13 @@ client.on('message', message => {
 });
 
 client.on('message', message => {
-    if(message.content.includes("rex")) {
+    if(message.content.includes("!rex")) {
       message.channel.send('***[Ads]*** Do you know about Rex Tracker? Its the brand new taming calculator / Ark Toolkit! http://rex-tracker.wcksoft.com'); 
     }
 });
 
 client.on('message', message => {
-    if(message.content.includes("REX")) {
+    if(message.content.includes("!REX")) {
       message.channel.send('***[Ads]*** Do you know about Rex Tracker? Its the brand new taming calculator / Ark Toolkit! http://rex-tracker.wcksoft.com'); 
     }
 });
