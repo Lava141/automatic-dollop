@@ -140,7 +140,7 @@ client.on('message', message => {
        message.channel.send(":ballot_box_with_check: Rex Tracker Ad's started sucessfully!");
       var interval = setInterval ( () => {
        message.channel.send({embed});
-      }, 1 * 600000); //600000 
+      }, 1 * 1800000); //30 MINS
     }
 });
 
