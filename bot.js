@@ -33,8 +33,12 @@ message.channel.send({embed: {
         value: "Get the current rex tracker version!"
       },
       {
-        name: "!play [URL]",
-        value: "Play music from youtube"
+        name: "!force-ads",
+        value: "Forces rex tracker to display ads"
+      },
+      {
+        name: "!start-ads",
+        value: "Start timer to display ads"
       }
     ],
   }
@@ -121,21 +125,12 @@ client.on('message', message => {
     }
 });
 
-client.on('message', message => {
-    if (message.content === "!start-ads") { 
-       message.channel.send(":ballot_box_with_check: Rex Tracker Ad's started sucessfully!");
-      var interval = setInterval ( () => {
-        message.channel.send('***[Ads]*** Do you know about Rex Tracker? Its the brand new taming calculator / Ark Toolkit! http://rex-tracker.wcksoft.com');
-      }, 1 * 600000); //600000 
-    }
-});
-
 const embed = new Discord.RichEmbed()
   /*
    * Alternatively, use "#00AE86", [0, 174, 134] or an integer number.
    */
   .setColor(0x00AE86)
-  .setImage("https://imgur.com/8Gte59I.png")
+  .setImage("https://imgur.com/OTmgcgj")
   /*
    * Takes a Date object, defaults to current date.
    */
@@ -147,8 +142,18 @@ const embed = new Discord.RichEmbed()
    */
   .addField("Join Our Discord!", "https://discord.gg/RzbJZyF", true);
 
+
 client.on('message', message => {
-    if (message.content === "!test-ads") {
+    if (message.content === "!start-ads") { 
+       message.channel.send(":ballot_box_with_check: Rex Tracker Ad's started sucessfully!");
+      var interval = setInterval ( () => {
+       message.channel.send({embed});
+      }, 1 * 600000); //600000 
+    }
+});
+
+client.on('message', message => {
+    if (message.content === "!force-ads") {
       message.channel.send({embed});
     }
 });
