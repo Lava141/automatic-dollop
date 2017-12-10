@@ -5,8 +5,8 @@ const clbot = new Cleverbot;
 
 client.on("ready",  () => {
   // This event will run if the bot starts, and logs in, successfully.
-  client.user.setGame('GAME HERE');
   console.log('Rex Tracker Bot has started sucessfully'); 
+  client.user.setGame('GAME HERE');
 });
 
 client.on('message', message => {
