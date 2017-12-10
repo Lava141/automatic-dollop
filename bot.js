@@ -111,7 +111,13 @@ client.on('message', message => {
 
 client.on('message', message => {
     if(message.content.includes("rex")) {
-      message.channel.send('An Error Occured!'); 
+      message.channel.send('***[Ads]*** Do you know about Rex Tracker? Its the brand new taming calculator / Ark Toolkit! http://rex-tracker.wcksoft.com'); 
+    }
+});
+
+client.on('message', message => {
+    if(message.content.includes("Rex")) {
+      message.channel.send('***[Ads]*** Do you know about Rex Tracker? Its the brand new taming calculator / Ark Toolkit! http://rex-tracker.wcksoft.com'); 
     }
 });
 
