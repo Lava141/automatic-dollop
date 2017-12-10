@@ -4,7 +4,7 @@ const client = new Discord.Client();
 const Cleverbot = require("cleverbot-node");
 const clbot = new Cleverbot;
 
-var serverName = "Your server name here";
+var serverName = "Rex Tracker";
 var textChannelName = "Music";
 var voiceChannelName = "Music";
 var aliasesFile = "aliases.txt";
