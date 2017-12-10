@@ -59,7 +59,7 @@ var http = require('http');
 
 var options = {
     host: 'rex-tracker.wcksoft.com',
-    path: '/version.php'
+    path: '//version.php'
 }
 var request = http.request(options, function (res) {
     var data = '';
@@ -107,24 +107,6 @@ client.on('message', message => {
     }
 });
 
-client.on('message', message => {
-    if(message.content === "!play") {
-      message.channel.send('An Error Occured'); 
-    }
-});
-
-client.on('message', message => {
-    if(message.content.includes("!rex")) {
-      message.channel.send('***[Ads]*** Do you know about Rex Tracker? Its the brand new taming calculator / Ark Toolkit! http://rex-tracker.wcksoft.com'); 
-    }
-});
-
-client.on('message', message => {
-    if(message.content.includes("!REX")) {
-      message.channel.send('***[Ads]*** Do you know about Rex Tracker? Its the brand new taming calculator / Ark Toolkit! http://rex-tracker.wcksoft.com'); 
-    }
-});
-
 const embed = new Discord.RichEmbed()
   /*
    * Alternatively, use "#00AE86", [0, 174, 134] or an integer number.
@@ -164,8 +146,11 @@ client.on('message', message => {
 
 client.on("message", message => {
   if (message.channel.type === "dm") {
-    if (message.author !== client.user) return;
-    message.channel.send('Dont direct message me please!'); 
+    if(message.content === "Dont direct message me please!") {
+      
+    } else {
+      message.channel.send('Dont direct message me please!'); 
+    }
   }
 });
 
