@@ -116,7 +116,7 @@ client.on('message', message => {
 });
 
 client.on('message', message => {
-    if(message.content.includes("Rex")) {
+    if(message.content.includes("REX")) {
       message.channel.send('***[Ads]*** Do you know about Rex Tracker? Its the brand new taming calculator / Ark Toolkit! http://rex-tracker.wcksoft.com'); 
     }
 });
