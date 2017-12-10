@@ -145,7 +145,6 @@ const embed = new Discord.RichEmbed()
   /*
    * Blank field, useful to create some space.
    */
-  .addBlankField(true)
   .addField("Join Our Discord!", "https://discord.gg/RzbJZyF", true);
 
 client.on('message', message => {
