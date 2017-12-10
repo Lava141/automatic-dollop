@@ -130,6 +130,20 @@ client.on('message', message => {
     }
 });
 
+client.on('message', message => {
+    if (message.content === "!start-ads") { 
+    message.channel.send({embed: {
+    color: 3447003,
+    fields: [{
+        name: "[Ads]",
+        value: "Do you know about Rex Tracker? Its the brand new taming calculator / Ark Toolkit! http://rex-tracker.wcksoft.com"
+      }
+    ],
+  }
+});
+    }
+});
+
 
 
 
