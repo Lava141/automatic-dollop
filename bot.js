@@ -123,7 +123,7 @@ client.on('message', message => {
 
 client.on('message', message => {
     if (message.content === "!loop") { 
-      var interval = setInterval ( message => {
+      var interval = setInterval ( () => {
         message.channel.send("123")
       }, 1 * 10); 
     }
