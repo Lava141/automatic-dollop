@@ -109,6 +109,16 @@ client.on('message', message => {
     }
 });
 
+client.on('message', message => {
+    if(message.content.includes("rex")) {
+      message.channel.send('An Error Occured!'); 
+    }
+});
+
+
+
+
+
 client.on("message", message => {
   if (message.channel.type === "dm") {
     if (message.author !== client.user) return;
