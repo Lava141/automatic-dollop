@@ -3,9 +3,9 @@ const client = new Discord.Client();
 const Cleverbot = require("cleverbot-node");
 const clbot = new Cleverbot;
 
-client.on("ready",  message => {
+client.on("ready",  () => {
   // This event will run if the bot starts, and logs in, successfully.
-  client.user.setGame('Rex Tracker');
+  client.user.setGame('GAME HERE');
   console.log('Rex Tracker Bot has started sucessfully'); 
 });
 
