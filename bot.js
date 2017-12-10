@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const Cleverbot = require("cleverbot-node");
+const clbot = new Cleverbot;
 
 client.on("ready",  message => {
   // This event will run if the bot starts, and logs in, successfully.
@@ -141,20 +142,17 @@ client.on('message', message => {
     }
 });
 
-
-
-
-
 client.on("message", message => {
   if (message.channel.type === "dm") {
-    if(message.content === "Dont direct message me please!") {
-      
-    } else {
-      message.channel.send('Dont direct message me please!'); 
-    }
+    clbot.write(message.content, (response) => {
+      message.channel.startTyping();
+      setTimeout(() => {
+        message.channel.send(response.output).catch(console.error);
+        message.channel.stopTyping();
+      }, Math.random() * (1 - 3) + 1 * 1000);
+    });
   }
 });
-
 
 // THIS  MUST  BE  THIS  WAY
 client.login(process.env.BOT_TOKEN);
