@@ -10,6 +10,13 @@ client.on("ready",  () => {
 });
 
 client.on('message', message => {
+    if (message.content === '!update-game') {
+    	message.channel.send(":ballot_box_with_check: Rex Tracker game update sucessfully!");
+      client.user.setGame('Rex Tracker');
+  	}
+});
+
+client.on('message', message => {
     if (message.content === '!help') {
 message.channel.send({embed: {
     color: 3447003,
