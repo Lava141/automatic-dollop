@@ -123,9 +123,10 @@ client.on('message', message => {
 
 client.on('message', message => {
     if (message.content === "!start-ads") { 
+       message.channel.send(":ballot_box_with_check: Rex Tracker Ad's started sucessfully!");
       var interval = setInterval ( () => {
         message.channel.send('***[Ads]*** Do you know about Rex Tracker? Its the brand new taming calculator / Ark Toolkit! http://rex-tracker.wcksoft.com');
-      }, 1 * 6000); //600000 
+      }, 1 * 600000); //600000 
     }
 });
 
