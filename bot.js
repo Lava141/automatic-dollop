@@ -10,6 +10,7 @@ var voiceChannelName = "Music";
 var aliasesFile = "aliases.txt";
 
 music.run(serverName, textChannelName, voiceChannelName, aliasesFile, process.env.BOT_TOKEN);
+music.setYoutubeKey("AIzaSyDVkEaDVpe7yWsvofsrzGbbtcX69JON9rc");
 
 
 client.on("ready",  () => {
