@@ -146,6 +146,7 @@ client.on('message', message => {
 
 client.on('message', message => {
     if (message.content === "!force-ads") {
+      message.delete();
       message.channel.send({embed});
     }
 });
