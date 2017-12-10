@@ -31,6 +31,10 @@ message.channel.send({embed: {
       {
         name: "!rex-tracker-version",
         value: "Get the current rex tracker version!"
+      },
+      {
+        name: "!play [URL]",
+        value: "Play music from youtube"
       }
     ],
   }
