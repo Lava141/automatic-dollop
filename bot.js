@@ -152,6 +152,7 @@ client.on('message', message => {
 
 client.on("message", message => {
   if (message.channel.type === "dm") {
+    if (message.author.bot) return;
     clbot.write(message.content, (response) => {
       message.channel.startTyping();
       setTimeout(() => {
