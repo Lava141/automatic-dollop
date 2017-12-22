@@ -12,7 +12,7 @@ bot.TOKEN = '<bot-token>';
 bot.DETAILED_LOGGING = false;
 bot.DELETE_COMMANDS = false;
 
-bot.COLOR = 0x351C75;
+bot.COLOR = 0x00AE86;
 bot.SUCCESS_COLOR = 0x00ff00;
 bot.ERROR_COLOR = 0x0000ff;
 bot.INFO_COLOR = 0x0000ff;
