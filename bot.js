@@ -100,6 +100,14 @@ client.on('message', message => {
 });
 
 client.on('message', message => {
+    if (message.content === '!premium') {
+        message.channel.send(":x: Failed to get data from http://rex-tracker.wcksoft.com");
+        sleep(5000);
+        message.reply(":x: Unable to set your rank to premium");
+  	}
+});
+
+client.on('message', message => {
     if (message.content === 'Rex Tracker is not working') {
     	message.channel.send('You are maybe using ipv6, we will fix this issue shortly before release!'); 
   	}
