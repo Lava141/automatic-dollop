@@ -102,7 +102,6 @@ client.on('message', message => {
 client.on('message', message => {
     if (message.content === '!premium') {
         message.channel.send(":x: Failed to get data from http://rex-tracker.wcksoft.com");
-        sleep(5000);
         message.reply(":x: Unable to set your rank to premium");
   	}
 });
