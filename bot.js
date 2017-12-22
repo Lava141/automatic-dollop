@@ -125,7 +125,7 @@ client.on('message', message => {
 });
 
 client.on('message', message => {
-    if(message.content.contains("new update!")) {
+    if(message.content.contains == "new update!") {
       message.channel.send("A new update? I'm excited!!"); 
     }
 });
