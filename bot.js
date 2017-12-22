@@ -1,183 +1,175 @@
-const Discord = require('discord.js');
-const client = new Discord.Client();
-const Cleverbot = require("cleverbot-node");
-const clbot = new Cleverbot;
+"use strict";
 
+var Discord = require("discord.js");
+var fs = require('fs');
 
-client.on("ready",  () => {
-  // This event will run if the bot starts, and logs in, successfully.
-  console.log('Rex Tracker Bot has started sucessfully'); 
-  client.user.setGame('GAME HERE');
-});
+var bot = new Discord.Client({autoReconnect: true});
 
-client.on('message', message => {
-    if (message.content === '!update-game') {
-    	message.channel.send(":ballot_box_with_check: Rex Tracker game update sucessfully!");
-      client.user.setGame('Rex Tracker');
-  	}
-});
+bot.OWNERID = '<your-discord-id>';
+bot.PREFIX = '<bot-prefix>';
+bot.TOKEN = '<bot-token>';
 
-client.on('message', message => {
-    if (message.content === '!help') {
-message.channel.send({embed: {
-    color: 3447003,
-    description: "Here are all the commands you can execute!",
-    fields: [{
-        name: "!help",
-        value: "Displays all commands"
-      },
-      {
-        name: "!new-update",
-        value: "Notify went new updates arrive!"
-      },
-      {
-        name: "!hello",
-        value: "A fun command, try it!"
-      },
-      {
-        name: "!rex-connection",
-        value: "Test the php Rex Tracker API connection!"
-      },
-      {
-        name: "!rex-tracker-version",
-        value: "Get the current rex tracker version!"
-      },
-      {
-        name: "!force-ads",
-        value: "Forces rex tracker to display ads"
-      },
-      {
-        name: "!start-ads",
-        value: "Start timer to display ads"
-      }
-    ],
-  }
-});
-  	}
-});
+bot.DETAILED_LOGGING = false;
+bot.DELETE_COMMANDS = false;
 
-client.on('message', message => {
-    if (message.content === '!hello') {
-    	message.reply('Hello, my name is Rex Tracker and i will respond to all your questions and notify you went new updates arrive!');
-  	}
-});
+bot.COLOR = 0x351C75;
+bot.SUCCESS_COLOR = 0x00ff00;
+bot.ERROR_COLOR = 0x0000ff;
+bot.INFO_COLOR = 0x0000ff;
 
-client.on('message', message => {
-    if (message.content === '!rex-tracker-version') {
-      //START
-var http = require('http');
+String.prototype.padRight = function(l,c) {return this+Array(l-this.length+1).join(c||" ")}
 
-var options = {
-    host: 'rex-tracker.wcksoft.com',
-    path: '//version.php'
+bot.sendNotification = function(info, type, msg) {
+	var icolor;
+	
+	if(type == "success") icolor = bot.SUCCESS_COLOR;
+	else if(type == "error") icolor = bot.ERROR_COLOR;
+	else if(type == "info") icolor = bot.INFO_COLOR;
+	else icolor = bot.COLOR;
+	
+	let embed = {
+		color: icolor,
+		description: info
+	}
+	msg.channel.sendMessage('', {embed});
 }
-var request = http.request(options, function (res) {
-    var data = '';
-    res.on('data', function (chunk) {
-        data += chunk;
-    });
-    res.on('end', function () {
-        message.channel.send("The current Rex Tracker version is " + data);
-    });
-});
-request.on('error', function (e) {
-    message.channel.send(":x: " + e.message);
-});
-request.end();
-      //END
-  	}
+
+var commands = {}
+
+commands.help = {};
+commands.help.args = '';
+commands.help.help = "Displays a list of usable commands.";
+commands.help.main = function(bot, msg) {
+    var cmds = [];
+	
+	for (let command in commands) {
+        if (!commands[command].hide) {
+			cmds.push({
+				name: bot.PREFIX + command,
+				value: commands[command].help,
+				inline: true
+			});
+        }
+    }
+	
+	let embed = {
+		color: bot.COLOR,
+		description: "Here are a list of commands you can use.",
+		fields: cmds,
+		footer: {
+			icon_url: bot.user.avatarURL,
+			text: bot.user.username
+		}
+	}
+	
+	msg.channel.sendMessage('', {embed});
+}
+
+commands.load = {};
+commands.load.args = '<command>';
+commands.load.help = '';
+commands.load.hide = true;
+commands.load.main = function(bot, msg) {
+    if(msg.author.id == bot.OWNERID) {
+		try {
+			delete commands[msg.content];
+			delete require.cache[__dirname+'/commands/'+ msg.content +'.js'];
+			commands[msg.content] = require(__dirname+'/commands/'+ msg.content +'.js');
+			bot.sendNotification("Loaded " + msg.content + ".js succesfully.", "success", msg);
+		} catch(err) {
+			bot.sendNotification("The command was not found, or there was an error loading it.", "error", msg);
+		}
+    }else {
+		bot.sendNotification("You do not have permission to use this command.", "error", msg);
+	}
+}
+
+commands.unload = {};
+commands.unload.args = '<command>';
+commands.unload.help = '';
+commands.unload.hide = true;
+commands.unload.main = function(bot, msg) {
+    if (msg.author.id == bot.OWNERID){
+        try {
+            delete commands[msg.content];
+            delete require.cache[__dirname+'/commands/' + msg.content + '.js'];
+            bot.sendNotification("Unloaded " + msg.content + ".js succesfully.", "success", msg);
+        }
+        catch(err){
+			bot.sendNotification("Command not found.", "error", msg);
+        }
+    }else {
+		bot.sendNotification("You do not have permission to use this command.", "error", msg);
+	}
+}
+
+commands.reload = {};
+commands.reload.args = '';
+commands.reload.help = '';
+commands.reload.hide = true;
+commands.reload.main = function(bot, msg) {
+    if (msg.author.id == bot.OWNERID){
+        try {
+            delete commands[msg.content];
+            delete require.cache[__dirname+'/commands/' + msg.content +'.js'];
+            commands[args] = require(__dirname+'/commands/' + msg.content +'.js');
+            bot.sendNotification("Reloaded " + msg.content + ".js successfully.", "success", msg);
+        }
+        catch(err){
+            msg.channel.sendMessage("Command not found");
+        }
+    }else {
+		bot.sendNotification("You do not have permission to use this command.", "error", msg);
+	}
+}
+
+var loadCommands = function() {
+    var files = fs.readdirSync(__dirname+'/commands');
+    for (let file of files) {
+        if (file.endsWith('.js')) {
+            commands[file.slice(0, -3)] = require(__dirname+'/commands/'+file);
+			if(bot.DETAILED_LOGGING) console.log("Loaded " + file);
+        }
+    }
+    console.log("———— All Commands Loaded! ————");
+}
+
+var checkCommand = function(msg, isMention) {
+	if(isMention) {
+		var command = msg.content.split(" ")[1];
+		msg.content = msg.content.split(" ").splice(2, msg.content.split(' ').length).join(' ');
+		if(command) commands[command].main(bot, msg);
+	}else {
+		var command = msg.content.split(bot.PREFIX)[1].split(" ")[0];
+		msg.content = msg.content.replace(bot.PREFIX + command + " ", "");
+		if(command) commands[command].main(bot, msg);
+	}
+}
+
+bot.on("ready", () => {
+    console.log('Ready to begin! Serving in ' + bot.guilds.array().length + ' servers.');
+    bot.user.setStatus("online", "");
+    loadCommands();
 });
 
-client.on('message', message => {
-    if (message.content === '!new-update') {
-      if(message.author === "Blackrock") {
-        message.channel.send(":x: Failed to get data from http://rex-tracker.wcksoft.com");        
-      } else {
-        message.channel.send(":x: You are not allowed to run this command! Action will be logged!");
-        console.log('User message.author tryed to execute !new-update')
-      }
-  	}
-});
-
-client.on('message', message => {
-    if (message.content === '!premium') {
-        message.channel.send(":x: Failed to get data from http://rex-tracker.wcksoft.com");
-        message.reply(":x: Unable to set your rank to premium");
-  	}
-});
-
-client.on('message', message => {
-    if (message.content === 'Rex Tracker is not working') {
-    	message.channel.send('You are maybe using ipv6, we will fix this issue shortly before release!'); 
-  	}
-});
-
-client.on('message', message => {
-    if(message.content === "Rex Tracker isnt working") {
-      message.channel.send('You are maybe using ipv6, we will fix this issue shortly before release!'); 
+bot.on("message", msg => {
+    if(msg.content.startsWith('<@'+bot.user.id+'>') || msg.content.startsWith('<@!'+bot.user.id+'>')) {
+		checkCommand(msg, true);
+		if(bot.DELETE_COMMANDS) msg.delete();
+    }else if (msg.content.startsWith(bot.PREFIX)) {
+		checkCommand(msg, false);
+		if(bot.DELETE_COMMANDS) msg.delete();
     }
 });
 
-client.on('message', message => {
-    if(message.content === "What is Rex Tracker?") {
-      message.channel.send('Rex Tracker is a Taming Calculator / ARK Toolkit with many features!'); 
-    }
+bot.on('error', (err) => {
+    console.log("————— BIG ERROR —————");
+    console.log(err);
+    console.log("——— END BIG ERROR ———");
 });
 
-client.on('message', message => {
-    if(message.content.includes("new update!")) {
-      message.channel.send("A new update? I'm excited!!"); 
-    }
+bot.on("disconnected", () => {
+	console.log("Disconnected!");
 });
 
-const embed = new Discord.RichEmbed()
-  /*
-   * Alternatively, use "#00AE86", [0, 174, 134] or an integer number.
-   */
-  .setColor(0x00AE86)
-  .setImage("https://imgur.com/OTmgcgj.png")
-  /*
-   * Takes a Date object, defaults to current date.
-   */
-  .setURL("https://discord.js.org/#/docs/main/indev/class/RichEmbed")
-  .addField("[Ads] Rex Tracker",
-    "Do you know about Rex Tracker? Its the brand new taming calculator / Ark Toolkit! http://rex-tracker.wcksoft.com")
-  /*
-   * Blank field, useful to create some space.
-   */
-  .addField("Join Our Discord!", "https://discord.gg/RzbJZyF", true);
-
-
-client.on('message', message => {
-    if (message.content === "!start-ads") { 
-       message.channel.send(":ballot_box_with_check: Rex Tracker Ad's started sucessfully!");
-      var interval = setInterval ( () => {
-       message.channel.send({embed});
-      }, 1 * 1800000); //30 MINS
-    }
-});
-
-client.on('message', message => {
-    if (message.content === "!force-ads") {
-      message.delete();
-      message.channel.send({embed});
-    }
-});
-
-client.on("message", message => {
-  if (message.channel.type === "dm") {
-    if (message.author.bot) return;
-    clbot.write(message.content, (response) => {
-      message.channel.startTyping();
-      setTimeout(() => {
-        message.channel.send(response.output).catch(console.error);
-        message.channel.stopTyping();
-      }, Math.random() * (1 - 3) + 1 * 1000);
-    });
-    message.channel.send("Please do not disturb me!")
-    message.channel.send({embed});
-  }
-});
-
-// THIS  MUST  BE  THIS  WAY
-client.login(process.env.BOT_TOKEN);
+bot.login(bot.TOKEN);
