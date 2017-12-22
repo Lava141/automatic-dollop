@@ -172,4 +172,4 @@ bot.on("disconnected", () => {
 	console.log("Disconnected!");
 });
 
-bot.login(bot.TOKEN);
+bot.login(process.env.BOT_TOKEN);
