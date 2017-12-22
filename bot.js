@@ -5,8 +5,8 @@ var fs = require('fs');
 
 var bot = new Discord.Client({autoReconnect: true});
 
-bot.OWNERID = '<your-discord-id>';
-bot.PREFIX = '<bot-prefix>';
+bot.OWNERID = '174635229829529600';
+bot.PREFIX = '!';
 bot.TOKEN = '<bot-token>';
 
 bot.DETAILED_LOGGING = false;
