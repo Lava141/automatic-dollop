@@ -124,6 +124,12 @@ client.on('message', message => {
     }
 });
 
+client.on('message', message => {
+    if(message.content.contains("new update!")) {
+      message.channel.send("A new update? I'm excited!!"); 
+    }
+});
+
 const embed = new Discord.RichEmbed()
   /*
    * Alternatively, use "#00AE86", [0, 174, 134] or an integer number.
