@@ -35,7 +35,6 @@ bot.sendNotification = function(info, type, msg) {
 }
 
 var commands = {}
-var smart_ai = {}
 
 commands.help = {};
 commands.help.args = '';
@@ -48,35 +47,6 @@ commands.help.main = function(bot, msg) {
 			cmds.push({
 				name: bot.PREFIX + command,
 				value: commands[command].help,
-				inline: true
-			});
-        }
-    }
-	
-	let embed = {
-		color: bot.COLOR,
-		description: "Here are a list of commands you can use.",
-		fields: cmds,
-		footer: {
-			icon_url: bot.user.avatarURL,
-			text: bot.user.username
-		}
-	}
-	
-	msg.channel.sendMessage('', {embed});
-}
-
-smart_ai.help = {};
-smart_ai.help.args = '';
-smart_ai.help.help = "Displays a list of usable commands.";
-smart_ai.help.main = function(bot, msg) {
-    var cmds = [];
-	
-	for (let ai in smart_ai) {
-        if (!smart_ai[ai].hide) {
-			cmds.push({
-				name: ai,
-				value: smart_ai[ai].help,
 				inline: true
 			});
         }
@@ -114,25 +84,6 @@ commands.load.main = function(bot, msg) {
 	}
 }
 
-smart_ai.load = {};
-smart_ai.load.args = '<command>';
-smart_ai.load.help = '';
-smart_ai.load.hide = true;
-smart_ai.load.main = function(bot, msg) {
-    if(msg.author.id == bot.OWNERID) {
-		try {
-			delete smart_ai[msg.content];
-			delete require.cache[__dirname+'/AI/'+ msg.content +'.js'];
-			smart_ai[msg.content] = require(__dirname+'/AI/'+ msg.content +'.js');
-			bot.sendNotification("Loaded " + msg.content + ".js succesfully.", "success", msg);
-		} catch(err) {
-			bot.sendNotification("The command was not found, or there was an error loading it.", "error", msg);
-		}
-    }else {
-		bot.sendNotification("You do not have permission to use this command.", "error", msg);
-	}
-}
-
 commands.unload = {};
 commands.unload.args = '<command>';
 commands.unload.help = '';
@@ -142,25 +93,6 @@ commands.unload.main = function(bot, msg) {
         try {
             delete commands[msg.content];
             delete require.cache[__dirname+'/commands/' + msg.content + '.js'];
-            bot.sendNotification("Unloaded " + msg.content + ".js succesfully.", "success", msg);
-        }
-        catch(err){
-			bot.sendNotification("Command not found.", "error", msg);
-        }
-    }else {
-		bot.sendNotification("You do not have permission to use this command.", "error", msg);
-	}
-}
-
-smart_ai.unload = {};
-smart_ai.unload.args = '<command>';
-smart_ai.unload.help = '';
-smart_ai.unload.hide = true;
-smart_ai.unload.main = function(bot, msg) {
-    if (msg.author.id == bot.OWNERID){
-        try {
-            delete smart_ai[msg.content];
-            delete require.cache[__dirname+'/AI/' + msg.content + '.js'];
             bot.sendNotification("Unloaded " + msg.content + ".js succesfully.", "success", msg);
         }
         catch(err){
@@ -191,27 +123,6 @@ commands.reload.main = function(bot, msg) {
 	}
 }
 
-smart_ai.reload = {};
-smart_ai.reload.args = '';
-smart_ai.reload.help = '';
-smart_ai.reload.hide = true;
-smart_ai.reload.main = function(bot, msg) {
-    if (msg.author.id == bot.OWNERID){
-        try {
-            delete smart_ai[msg.content];
-            delete require.cache[__dirname+'/AI/' + msg.content +'.js'];
-            smart_ai[args] = require(__dirname+'/AI/' + msg.content +'.js');
-            bot.sendNotification("Reloaded " + msg.content + ".js successfully.", "success", msg);
-        }
-        catch(err){
-            msg.channel.sendMessage("Command not found");
-        }
-    }else {
-		bot.sendNotification("You do not have permission to use this command.", "error", msg);
-	}
-}
-
-
 var loadCommands = function() {
     var files = fs.readdirSync(__dirname+'/commands');
     for (let file of files) {
@@ -221,17 +132,6 @@ var loadCommands = function() {
         }
     }
     console.log("———— All Commands Loaded! ————");
-}
-
-var loadSmartAI = function() {
-    var files = fs.readdirSync(__dirname+'/AI');
-    for (let file of files) {
-        if (file.endsWith('.js')) {
-            smart_ai[file.slice(0, -3)] = require(__dirname+'/AI/'+file);
-			if(bot.DETAILED_LOGGING) console.log("Loaded " + file);
-        }
-    }
-    console.log("———— Smart AI Loaded! ————");
 }
 
 var checkCommand = function(msg, isMention) {
@@ -246,17 +146,6 @@ var checkCommand = function(msg, isMention) {
 	}
 }
 
-var checkSmartAI = function(msg, isMention) {
-	if(isMention) {
-		var ai = msg.content.split(" ")[1];
-		msg.content = msg.content.split(" ").splice(2, msg.content.split(' ').length).join(' ');
-		if(ai) smart_ai[ai].main(bot, msg);
-	}else {
-		var ai = msg.content.split(bot.PREFIX)[1].split(" ")[0];
-		msg.content = msg.content.replace(bot.PREFIX + ai + " ", "");
-		if(ai) smart_ai[ai].main(bot, msg);
-	}
-}
 
 
 bot.on("ready", () => {
@@ -270,11 +159,9 @@ bot.on("ready", () => {
 bot.on("message", msg => {
     if(msg.content.startsWith('<@'+bot.user.id+'>') || msg.content.startsWith('<@!'+bot.user.id+'>')) {
 		checkCommand(msg, true);
-	    	checkSmartAI(msg, true);
 		if(bot.DELETE_COMMANDS) msg.delete();
     }else if (msg.content.startsWith(bot.PREFIX)) {
 		checkCommand(msg, false);
-	    	checkSmartAI(msg, false);
 		if(bot.DELETE_COMMANDS) msg.delete();
     }
 });
