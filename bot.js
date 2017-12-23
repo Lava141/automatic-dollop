@@ -186,7 +186,7 @@ bot.on("message", msg => {
 		if(bot.DELETE_COMMANDS) msg.delete();
     }else if (msg.content.startsWith(bot.PREFIX)) {
 		checkCommand(msg, false);
-	    	checkSmartAI(msg, true);
+	    	checkSmartAI(msg, false);
 		if(bot.DELETE_COMMANDS) msg.delete();
     }
 });
