@@ -66,6 +66,35 @@ commands.help.main = function(bot, msg) {
 	msg.channel.sendMessage('', {embed});
 }
 
+smart_ai.help = {};
+smart_ai.help.args = '';
+smart_ai.help.help = "Displays a list of usable commands.";
+smart_ai.help.main = function(bot, msg) {
+    var cmds = [];
+	
+	for (let ai in smart_ai) {
+        if (!smart_ai[ai].hide) {
+			cmds.push({
+				name: ai,
+				value: smart_ai[ai].help,
+				inline: true
+			});
+        }
+    }
+	
+	let embed = {
+		color: bot.COLOR,
+		description: "Here are a list of commands you can use.",
+		fields: cmds,
+		footer: {
+			icon_url: bot.user.avatarURL,
+			text: bot.user.username
+		}
+	}
+	
+	msg.channel.sendMessage('', {embed});
+}
+
 commands.load = {};
 commands.load.args = '<command>';
 commands.load.help = '';
@@ -85,6 +114,25 @@ commands.load.main = function(bot, msg) {
 	}
 }
 
+smart_ai.load = {};
+smart_ai.load.args = '<command>';
+smart_ai.load.help = '';
+smart_ai.load.hide = true;
+smart_ai.load.main = function(bot, msg) {
+    if(msg.author.id == bot.OWNERID) {
+		try {
+			delete smart_ai[msg.content];
+			delete require.cache[__dirname+'/AI/'+ msg.content +'.js'];
+			smart_ai[msg.content] = require(__dirname+'/AI/'+ msg.content +'.js');
+			bot.sendNotification("Loaded " + msg.content + ".js succesfully.", "success", msg);
+		} catch(err) {
+			bot.sendNotification("The command was not found, or there was an error loading it.", "error", msg);
+		}
+    }else {
+		bot.sendNotification("You do not have permission to use this command.", "error", msg);
+	}
+}
+
 commands.unload = {};
 commands.unload.args = '<command>';
 commands.unload.help = '';
@@ -94,6 +142,25 @@ commands.unload.main = function(bot, msg) {
         try {
             delete commands[msg.content];
             delete require.cache[__dirname+'/commands/' + msg.content + '.js'];
+            bot.sendNotification("Unloaded " + msg.content + ".js succesfully.", "success", msg);
+        }
+        catch(err){
+			bot.sendNotification("Command not found.", "error", msg);
+        }
+    }else {
+		bot.sendNotification("You do not have permission to use this command.", "error", msg);
+	}
+}
+
+smart_ai.unload = {};
+smart_ai.unload.args = '<command>';
+smart_ai.unload.help = '';
+smart_ai.unload.hide = true;
+smart_ai.unload.main = function(bot, msg) {
+    if (msg.author.id == bot.OWNERID){
+        try {
+            delete smart_ai[msg.content];
+            delete require.cache[__dirname+'/AI/' + msg.content + '.js'];
             bot.sendNotification("Unloaded " + msg.content + ".js succesfully.", "success", msg);
         }
         catch(err){
@@ -123,6 +190,27 @@ commands.reload.main = function(bot, msg) {
 		bot.sendNotification("You do not have permission to use this command.", "error", msg);
 	}
 }
+
+smart_ai.reload = {};
+smart_ai.reload.args = '';
+smart_ai.reload.help = '';
+smart_ai.reload.hide = true;
+smart_ai.reload.main = function(bot, msg) {
+    if (msg.author.id == bot.OWNERID){
+        try {
+            delete smart_ai[msg.content];
+            delete require.cache[__dirname+'/AI/' + msg.content +'.js'];
+            smart_ai[args] = require(__dirname+'/AI/' + msg.content +'.js');
+            bot.sendNotification("Reloaded " + msg.content + ".js successfully.", "success", msg);
+        }
+        catch(err){
+            msg.channel.sendMessage("Command not found");
+        }
+    }else {
+		bot.sendNotification("You do not have permission to use this command.", "error", msg);
+	}
+}
+
 
 var loadCommands = function() {
     var files = fs.readdirSync(__dirname+'/commands');
