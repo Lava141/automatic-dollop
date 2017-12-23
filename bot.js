@@ -262,7 +262,7 @@ var checkSmartAI = function(msg, isMention) {
 bot.on("ready", () => {
     console.log('Ready to begin! Serving in ' + bot.guilds.array().length + ' servers.');
     bot.user.setStatus("online", "");
-    bot.user.setGame("Rex Tracker Dev Kit")
+    bot.user.setGame("ARK: Survival Evolved")
     loadCommands();
     loadSmartAI();
 });
