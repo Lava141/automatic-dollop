@@ -35,6 +35,7 @@ bot.sendNotification = function(info, type, msg) {
 }
 
 var commands = {}
+var smart_ai = {}
 
 commands.help = {};
 commands.help.args = '';
@@ -134,6 +135,17 @@ var loadCommands = function() {
     console.log("———— All Commands Loaded! ————");
 }
 
+var loadSmartAI = function() {
+    var files = fs.readdirSync(__dirname+'/AI');
+    for (let file of files) {
+        if (file.endsWith('.js')) {
+            smart_ai[file.slice(0, -3)] = require(__dirname+'/AI/'+file);
+			if(bot.DETAILED_LOGGING) console.log("Loaded " + file);
+        }
+    }
+    console.log("———— Smart AI Loaded! ————");
+}
+
 var checkCommand = function(msg, isMention) {
 	if(isMention) {
 		var command = msg.content.split(" ")[1];
@@ -146,18 +158,35 @@ var checkCommand = function(msg, isMention) {
 	}
 }
 
+var checkSmartAI = function(msg, isMention) {
+	if(isMention) {
+		var ai = msg.content.split(" ")[1];
+		msg.content = msg.content.split(" ").splice(2, msg.content.split(' ').length).join(' ');
+		if(ai) smart_ai[ai].main(bot, msg);
+	}else {
+		var ai = msg.content.split(bot.PREFIX)[1].split(" ")[0];
+		msg.content = msg.content.replace(bot.PREFIX + command + " ", "");
+		if(ai) smart_ai[ai].main(bot, msg);
+	}
+}
+
+
 bot.on("ready", () => {
     console.log('Ready to begin! Serving in ' + bot.guilds.array().length + ' servers.');
     bot.user.setStatus("online", "");
+    bot.user.setGame("Rex Tracker Dev Kit")
     loadCommands();
+    loadSmartAI();
 });
 
 bot.on("message", msg => {
     if(msg.content.startsWith('<@'+bot.user.id+'>') || msg.content.startsWith('<@!'+bot.user.id+'>')) {
 		checkCommand(msg, true);
+	    	checkSmartAI(msg, true);
 		if(bot.DELETE_COMMANDS) msg.delete();
     }else if (msg.content.startsWith(bot.PREFIX)) {
 		checkCommand(msg, false);
+	    	checkSmartAI(msg, true);
 		if(bot.DELETE_COMMANDS) msg.delete();
     }
 });
