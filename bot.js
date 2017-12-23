@@ -165,7 +165,7 @@ var checkSmartAI = function(msg, isMention) {
 		if(ai) smart_ai[ai].main(bot, msg);
 	}else {
 		var ai = msg.content.split(bot.PREFIX)[1].split(" ")[0];
-		msg.content = msg.content.replace(bot.PREFIX + command + " ", "");
+		msg.content = msg.content.replace(bot.PREFIX + ai + " ", "");
 		if(ai) smart_ai[ai].main(bot, msg);
 	}
 }
