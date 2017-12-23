@@ -153,7 +153,6 @@ bot.on("ready", () => {
     bot.user.setStatus("online", "");
     bot.user.setGame("ARK: Survival Evolved")
     loadCommands();
-    loadSmartAI();
 });
 
 bot.on("message", msg => {
