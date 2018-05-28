@@ -5,7 +5,7 @@ var fs = require('fs');
 
 var bot = new Discord.Client({autoReconnect: true});
 
-bot.OWNERID = '449249270080602123';
+bot.OWNERID = '174635229829529600';
 bot.PREFIX = '!';
 bot.TOKEN = 'NDQ5MjQ5MjcwMDgwNjAyMTIz.Deh74g.8VLVVLjsNeXTgq1KbTj69a6E-HE';
 
