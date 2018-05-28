@@ -33,14 +33,6 @@ client.on("guildDelete", guild => {
 });
 
 client.on("message", async message => {
-if (message.contains === 'hello') {
-  if (!message.author.id == "449249270080602123") {
-      msg.reply('Hello welcome to the ARX Cluster!');
-  }
-}
-});
-
-client.on("message", async message => {
   // This event will run on every single message received, from any channel or DM.
   
   // It's good practice to ignore other bots. This also makes your bot ignore itself
@@ -59,6 +51,12 @@ client.on("message", async message => {
   const command = args.shift().toLowerCase();
   
   // Let's go with a few common example commands! Feel free to delete or change those.
+  
+  if (message.contains === 'hello') {
+  if (!message.author.id == "449249270080602123") {
+      msg.reply('Hello welcome to the ARX Cluster!');
+  }
+  }
   
   if(command === "ping") {
     // Calculates ping between sending a message and editing it, giving a nice round-trip latency.
