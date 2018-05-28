@@ -32,6 +32,13 @@ client.on("guildDelete", guild => {
   client.user.setActivity(`Serving ${client.guilds.size} servers`);
 });
 
+client.on("message", async message => {
+if (message.contains === 'hello') {
+  if (!message.author.id == "449249270080602123") {
+      msg.reply('Hello welcome to the ARX Cluster!');
+  }
+}
+});
 
 client.on("message", async message => {
   // This event will run on every single message received, from any channel or DM.
