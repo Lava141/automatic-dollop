@@ -53,7 +53,7 @@ client.on("message", async message => {
   // Let's go with a few common example commands! Feel free to delete or change those.
   
   if (message.contains === 'hello') {
-  if (!message.author.id == "449249270080602123") {
+  if (!message.author.id === "449249270080602123") {
       msg.reply('Hello welcome to the ARX Cluster!');
   }
   }
